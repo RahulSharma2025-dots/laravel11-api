@@ -28,7 +28,6 @@ class AuthenticatedSessionController extends Controller
             if (Auth::attempt($validated->validated())) {
                 $user = Auth::user();
                 $token = $user->createToken('login token')->plainTextToken;
-    
                 return response()->json([
                     'message' => 'Login successfully',
                     'user' => $user,
