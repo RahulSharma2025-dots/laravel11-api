@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -28,7 +27,7 @@ class AuthenticatedSessionController extends Controller
         try {
             if (Auth::attempt($validated->validated())) {
                 $user = Auth::user();
-                $token = $user->createToken('')->plainTextToken;
+                $token = $user->createToken('login token')->plainTextToken;
     
                 return response()->json([
                     'message' => 'Login successfully',
