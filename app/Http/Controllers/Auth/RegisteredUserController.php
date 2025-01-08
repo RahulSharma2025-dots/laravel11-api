@@ -4,11 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Validator;
 
 class RegisteredUserController extends Controller
@@ -30,7 +27,7 @@ class RegisteredUserController extends Controller
             return response()->json([
                 'errors' => $validated->errors() 
             ],422);
-        }   
+        }
 
         $user = User::create([
             'name' => $request->name,

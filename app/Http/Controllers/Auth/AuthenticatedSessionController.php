@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -27,7 +28,7 @@ class AuthenticatedSessionController extends Controller
         try {
             if (Auth::attempt($validated->validated())) {
                 $user = Auth::user();
-                $token = $user->createToken('login token')->plainTextToken;
+                $token = $user->createToken('login token', [], Carbon::now()->addMinutes(config('sanctum.expiration')));
                 return response()->json([
                     'message' => 'Login successfully',
                     'user' => $user,
